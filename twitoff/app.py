@@ -45,9 +45,33 @@ def create_app():
             text="this is some different tweet text",
             user=julian
             )
+        tweet3 = Tweet(
+            id=3,
+            text="a third tweet",
+            user=ryan
+            )
+        tweet4 = Tweet(
+            id=4,
+            text="a fourth tweet",
+            user=julian
+            )
+        tweet5 = Tweet(
+            id=5,
+            text="number 5",
+            user=ryan
+            )
+        tweet6 = Tweet(
+            id=6,
+            text="Number 6!",
+            user=julian
+            )
 
         DB.session.add(tweet1)
         DB.session.add(tweet2)
+        DB.session.add(tweet3)
+        DB.session.add(tweet4)
+        DB.session.add(tweet5)
+        DB.session.add(tweet6)
 
         # commit changes
         DB.session.commit()
