@@ -55,21 +55,3 @@ def create_app():
         <a href='/populate'> POPULATE</a>'''
 
     return app
-
-
-# # def main():
-# #     # app = create_app()
-# #     # app.populate()
-
-
-# # if __name__ == "__main__":
-# #     main()
-
-
-# from flask import Flask
-
-# app = Flask(__name__)
-
-# @app.route('/')
-# def home():
-#     return "hello world!"
