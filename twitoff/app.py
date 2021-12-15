@@ -1,3 +1,5 @@
+'''Flask Factory'''
+
 from flask import Flask, render_template
 from .models import DB, User
 from .twitter import add_or_update_user
@@ -5,7 +7,11 @@ from .twitter import add_or_update_user
 
 # app factory
 def create_app():
+    '''Flask Factory
 
+    Returns:
+        Flask App
+    '''
     # initialize Flask app
     app = Flask(__name__)
 
@@ -16,12 +22,13 @@ def create_app():
     # connect app to DB
     DB.init_app(app)
 
-    # make root route
+    # define root route
     @app.route('/')
     def root():
         users = User.query.all()
         return render_template('base.html', users=users)
 
+    # define update route
     @app.route('/update')
     def update():
         users = User.query.all()
@@ -33,6 +40,7 @@ def create_app():
         <a href='/reset'> RESET </a>\
         <a href='/populate'> POPULATE</a>'''
 
+    # define populate route
     @app.route('/populate')
     def populate():
         add_or_update_user('ryanallred')
@@ -43,6 +51,7 @@ def create_app():
         <a href='/reset'> RESET </a>\
         <a href='/populate'> POPULATE</a>'''
 
+    # define reset route
     @app.route('/reset')
     def reset():
         # create user in DB

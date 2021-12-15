@@ -1,3 +1,5 @@
+'''sqlalchemy models'''
+
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -7,7 +9,9 @@ DB = SQLAlchemy()
 
 # create tables
 class User(DB.Model):
-    # each dm col will be a class attribute
+    '''Defines the User table in the sqlite
+    database
+    '''
 
     # create id attribute
     id = DB.Column(
@@ -22,13 +26,16 @@ class User(DB.Model):
         nullable=False
         )
 
+    # create newest_tweet_id attribute
     newest_tweet_id = DB.Column(
         DB.BigInteger
         )
 
 
 class Tweet(DB.Model):
-
+    '''Defines the Tweet table in the sqlite
+    database
+    '''
     id = DB.Column(
         DB.BigInteger,
         primary_key=True,
