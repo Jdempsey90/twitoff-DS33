@@ -22,6 +22,10 @@ class User(DB.Model):
         nullable=False
         )
 
+    newest_tweet_id = DB.Column(
+        DB.BigInteger
+        )
+
 
 class Tweet(DB.Model):
 
@@ -35,6 +39,11 @@ class Tweet(DB.Model):
         DB.Unicode(300),
         nullable=False
         )
+
+    vect = DB.Column(
+        DB.PickleType,
+        nullable=False
+    )
 
     user_id = DB.Column(
         DB.BigInteger,
