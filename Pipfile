@@ -11,6 +11,7 @@ tweepy = "*"
 spacy = "*"
 python-dotenv = "*"
 sklearn = "*"
+gunicorn = "*"
 
 [dev-packages]
 flake8 = "*"
