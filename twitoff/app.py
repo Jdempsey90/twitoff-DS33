@@ -77,7 +77,7 @@ def create_app():
         try:
             if request.method == 'POST':
                 add_or_update_user(name)
-                message = f"User {name} Succesfully added!"
+                message = f"User {name} Successfully added!"
 
             tweets = User.query.filter(User.username == name).one().tweets
 
@@ -99,23 +99,30 @@ def create_app():
             [request.values['user0'], request.values["user1"]]
             )
 
-        if user0 == user1:
-            message = "Cannot compare users to themselves!"
+        if request.values["tweet_text"]:
+            if user0 == user1:
+                message = "Cannot compare users to themselves!"
 
+            else:
+                # prediction returns a 0 or 1
+                prediction = predict_user(
+                    user0, user1, request.values["tweet_text"])
+
+                message = "\
+                    '{}' is more likely to be said by {} than {}!\
+                    ".format(
+
+                    request.values["tweet_text"],
+                    user1 if prediction else user0,
+                    user0 if prediction else user1
+                )
         else:
-            # prediction returns a 0 or 1
-            prediction = predict_user(
-                user0, user1, request.values["tweet_text"])
-            message = "'{}' is more likely to be said by {} than {}!".format(
-                request.values["tweet_text"],
-                user1 if prediction else user0,
-                user0 if prediction else user1
-            )
+            message = "You must include tweet text before comparing users."
 
         return render_template(
-            'prediction.html',
-            title="Prediction",
-            message=message
-            )
+                'prediction.html',
+                title="Prediction",
+                message=message
+                )
 
     return app

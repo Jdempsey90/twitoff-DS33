@@ -108,12 +108,14 @@ def add_or_update_user(username):
         for tweet in tweets:
             if Tweet.query.get(tweet['id']):
                 pass
-            else:
+            elif len(tweet['full_text']) > 0:
                 tweet_vector = vectorize_tweet(tweet['full_text'])
+
                 db_tweet = Tweet(id=tweet['id'],
                                  text=tweet['full_text'][:300],
                                  vect=tweet_vector)
                 db_user.tweets.append(db_tweet)
+
                 DB.session.add(db_tweet)
 
         # Save the changes to the DB
